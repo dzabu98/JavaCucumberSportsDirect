@@ -25,12 +25,16 @@ public class SportsDirectHomePage extends BasePage
         PageFactory.initElements(driver, this);
     }
 
+    private void chooseCategory(int categoryInteger)
+    {
+        WebElement topMenu = topMenuHolder.findElement(By.id("ulTopLevelMenu"));
+        List<WebElement> tabs = topMenu.findElements(By.className("root"));
+        WebElement category = tabs.get(categoryInteger);
+        click(category);
+    }
 
         public void clickOnSaleTab() throws InterruptedException {
-            WebElement topMenu = topMenuHolder.findElement(By.id("ulTopLevelMenu"));
-            List<WebElement> tabs = topMenu.findElements(By.className("root"));
-            WebElement sale = tabs.get(0);
-            click(sale);
+            chooseCategory(0);
         }
 
 
