@@ -17,8 +17,7 @@ import static org.jsoup.nodes.Entities.EscapeMode.base;
 public class SportsDirectSalePage extends BasePage {
     @FindBy(className = "divPopBrands")
     private WebElement popularBrandsWrapper;
-    @FindBy(id = "popBrand2")
-    private WebElement nikeBrand;
+
 
 
     public SportsDirectSalePage(@NonNull WebDriver driver) {
@@ -31,20 +30,34 @@ public class SportsDirectSalePage extends BasePage {
         Assert.assertEquals(driver.getCurrentUrl(), url, "URLs are not matching");
     }
 
-
-    public void clickOnNikeLogo() throws InterruptedException {
-        waitForPageToFinishWithLoading();
-        click(nikeBrand);
-    }
-
-    public void nikeLogoPresenceCheck()
+    private void clickOnBrand(int brandInteger)
     {
         waitForPageToFinishWithLoading();
         WebElement popularBrands = popularBrandsWrapper.findElement(By.className("ulPopBrands"));
         List<WebElement> brands = popularBrands.findElements(By.className("brandLogo"));
-        WebElement nikeBrand = brands.get(0);
-        String nike = "nike";
-        Assert.assertEquals(nikeBrand.findElement(By.tagName("a")).getText(), nike, "Text is not found on selected element");
+        WebElement brand = brands.get(brandInteger);
+        click(brand);
+    }
+
+
+    public void clickOnNikeLogo() throws InterruptedException {
+       clickOnBrand(0);
+    }
+
+    private void brandLogoCheck(int brandInteger, String nameOfTheBrand)
+    {
+        waitForPageToFinishWithLoading();
+        WebElement popularBrands = popularBrandsWrapper.findElement(By.className("ulPopBrands"));
+        List<WebElement> brands = popularBrands.findElements(By.className("brandLogo"));
+        WebElement brandName = brands.get(brandInteger);
+        Assert.assertEquals(brandName.findElement(By.tagName("a")).getText(), nameOfTheBrand, "Text is not found on selected brand");
+    }
+
+    public void nikeLogoPresenceCheck()
+    {
+        String nameOfTheBrand = "nike";
+        int brandInteger = 0;
+        brandLogoCheck(brandInteger, nameOfTheBrand);
     }
 }
 
