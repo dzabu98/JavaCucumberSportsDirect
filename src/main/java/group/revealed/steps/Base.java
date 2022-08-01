@@ -1,9 +1,7 @@
 package group.revealed.steps;
 
 import group.revealed.driver.DriverManager;
-import group.revealed.pages.GooglePage;
-import group.revealed.pages.QARevealedContactUsPage;
-import group.revealed.pages.QARevealedHomePage;
+import group.revealed.pages.*;
 import group.revealed.pages.milosPages.MyFirstPage;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +12,8 @@ import java.time.Duration;
 
 @SuppressWarnings("unused")
 @RequiredArgsConstructor
-public class Base {
-
+public class Base
+{
     @Getter
     private final WebDriver driver = DriverManager.getDriver();
     @Getter
@@ -28,4 +26,11 @@ public class Base {
     private final MyFirstPage myFirstPage = new MyFirstPage(driver);
     @Getter
     private final QARevealedContactUsPage contactUsPage = new QARevealedContactUsPage(driver);
+    @Getter
+    private final SportsDirectHomePage sDirectHomePage = new SportsDirectHomePage(driver);
+    @Getter
+    private final SportsDirectSalePage sDirectSalePage = new SportsDirectSalePage(driver);
+    @Getter
+    private final SportsDirectNikeSalePage sDirectNikeSalePage = new SportsDirectNikeSalePage(driver);
+
 }
